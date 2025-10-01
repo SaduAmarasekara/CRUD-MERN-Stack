@@ -4,13 +4,15 @@ const app = express();
 const port = 3001; // 
 const host = "127.0.0.1";
 const mongoose = require("mongoose");
+const router = require('./router');
 
 
 // middleware
 app.use(cors());
 app.use(express.json());
 
-const uri = 'mongodb+srv://saduvindhaya:Sadu@1234@cluster0.u6h0cwx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+const uri =
+  "mongodb+srv://saduvindhaya:sadu1234@cluster0.fymsxjh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 const connect = async () => {
   try {
@@ -25,3 +27,5 @@ connect();
 const server = app.listen(port, host, () => {
   console.log(`Node server is listening at http://${host}:${port}`);
 });
+
+app.use('/api', router);
