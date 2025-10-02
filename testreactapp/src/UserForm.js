@@ -1,14 +1,7 @@
-import { Button, Grid, Typography } from '@mui/material';
-import { Input } from '@mui/material';
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { Button, Grid, Typography, TextField } from "@mui/material";
+import React, { useEffect, useState } from "react";
 
-
-
-
-
-const UsersForms = ({ addUser, updateUser, submitted, data ,isEdit}) => {
+const UsersForms = ({ addUser, updateUser, submitted, data, isEdit }) => {
   const [id, setId] = useState(0);
   const [name, setName] = useState("");
 
@@ -23,96 +16,70 @@ const UsersForms = ({ addUser, updateUser, submitted, data ,isEdit}) => {
     if (data?.id && data.id !== 0) {
       setId(data.id);
       setName(data.name);
-      
     }
   }, [data]);
 
   return (
     <Grid
       container
-      spacing={2}
+      spacing={3}
       sx={{
-        backgroundColor: "#ffffff",
-        marginBottom: "30px",
-        display: "block",
+        backgroundColor: "#f9f9f9",
+        padding: 4,
+        borderRadius: 3,
+        boxShadow: 3,
+        marginBottom: 4,
       }}
     >
       <Grid item xs={12}>
-        <Typography component={"h1"} sx={{ color: "#000000" }}>
-          User Form
+        <Typography variant="h5" sx={{ fontWeight: "bold", mb: 2 }}>
+          {isEdit ? "Update User" : "Add New User"}
         </Typography>
       </Grid>
-      <Grid item xs={12} sm={6} sx={{ display: "flex" }}>
-        <Typography
-          component={"label"}
-          htmlFor="id"
-          sx={{
-            color: "#000000",
-            marginRight: "20px",
-            fontSize: "16px",
-            width: "100px",
-            display: "block",
-          }}
-        >
-          ID
-        </Typography>
-        <Input
+
+      <Grid item xs={12} sm={6}>
+        <TextField
+          label="ID"
           type="number"
-          id="id"
-          name="id"
-          sx={{
-            width: "400px",
-          }}
+          fullWidth
           value={id}
           onChange={(e) => setId(e.target.value)}
         />
       </Grid>
 
-      <Grid item xs={12} sm={6} sx={{ display: "flex" }}>
-        <Typography
-          component={"label"}
-          htmlFor="id"
-          sx={{
-            color: "#000000",
-            marginRight: "20px",
-            fontSize: "16px",
-            width: "100px",
-            display: "block",
-          }}
-        >
-          Name
-        </Typography>
-        <Input
+      <Grid item xs={12} sm={6}>
+        <TextField
+          label="Name"
           type="text"
-          id="name"
-          name="name"
-          sx={{
-            width: "400px",
-          }}
+          fullWidth
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
       </Grid>
 
-      <Button
-        sx={{
-          margin: "auto",
-          marginBottom: "20px",
-          backgroundColor: "#00c6e6",
-          color: "#000000",
-          marginLeft: "15px",
-          marginTop: "20px",
-          "&:hover": {
-            opacity: "0.7",
-            backgroundColor: "#00c6e6",
-          },
-        }}
-        onClick={() => isEdit ? updateUser({ id, name }) :addUser({ id, name })}
-      >
-        {
-          isEdit ? "Update " : "Add "}
-      </Button>
+      <Grid item xs={12}>
+        <Button
+          variant="contained"
+          color="success"
+          onClick={() =>
+            isEdit ? updateUser({ id, name }) : addUser({ id, name })
+          }
+          sx={{
+            mt: 2,
+            py: 1.5,
+            px: 4,
+            fontWeight: "bold",
+            transition: "0.3s",
+            "&:hover": {
+              transform: "scale(1.05)",
+            },
+          }}
+        >
+          {isEdit ? "Update User" : "Add User"}
+        </Button>
+      </Grid>
     </Grid>
   );
 };
+
 export default UsersForms;
