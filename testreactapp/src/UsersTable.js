@@ -1,18 +1,31 @@
-import { Paper, TableContainer, TableHead, TableRow, TableCell, TableBody, Button, Table } from '@mui/material';
-import React from 'react';
-
-
-
+import {
+  Paper,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Button,
+  Table,
+} from "@mui/material";
+import React from "react";
 
 const Userstable = ({ rows, selectedUser, deleteUser }) => {
   return (
-    <TableContainer component={Paper}>
+    <TableContainer
+      component={Paper}
+      sx={{ boxShadow: 3, borderRadius: 3, overflow: "hidden" }}
+    >
       <Table>
-        <TableHead>
+        <TableHead sx={{ backgroundColor: "#1976d2" }}>
           <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Actions</TableCell>
+            <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>ID</TableCell>
+            <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>
+              Name
+            </TableCell>
+            <TableCell sx={{ color: "#fff", fontWeight: "bold" }}>
+              Actions
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -20,34 +33,28 @@ const Userstable = ({ rows, selectedUser, deleteUser }) => {
             rows.map((row) => (
               <TableRow
                 key={row.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                sx={{
+                  "&:last-child td, &:last-child th": { border: 0 },
+                  "&:hover": { backgroundColor: "#f5f5f5" },
+                }}
               >
-                <TableCell component="th" scope="row">
-                  {row.id}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
+                <TableCell>{row.id}</TableCell>
+                <TableCell>{row.name}</TableCell>
                 <TableCell>
                   <Button
-                    sx={{ margin: "0px 10px" }}
-                    onClick={() =>
-                      selectedUser({
-                        id: row.id,
-                        name: row.name,
-                      })
-                    }
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    sx={{ marginRight: 1 }}
+                    onClick={() => selectedUser({ id: row.id, name: row.name })}
                   >
                     Update
                   </Button>
                   <Button
-                    sx={{ margin: "0px 10px" }}
-                    onClick={() =>
-                     deleteUser({
-                        id: row.id,
-                      
-                      })
-                    }
+                    variant="contained"
+                    color="error"
+                    size="small"
+                    onClick={() => deleteUser({ id: row.id })}
                   >
                     Delete
                   </Button>
@@ -55,10 +62,8 @@ const Userstable = ({ rows, selectedUser, deleteUser }) => {
               </TableRow>
             ))
           ) : (
-            <TableRow
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row" colSpan={3}>
+            <TableRow>
+              <TableCell colSpan={3} align="center">
                 No Records Found
               </TableCell>
             </TableRow>
@@ -68,4 +73,5 @@ const Userstable = ({ rows, selectedUser, deleteUser }) => {
     </TableContainer>
   );
 };
+
 export default Userstable;
